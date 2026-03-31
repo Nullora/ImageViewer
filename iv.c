@@ -26,18 +26,17 @@ int main(){
 
 
 
-    SDL_Window *pwindow  = SDL_CreateWindow("hello!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0); 
+    SDL_Window *pwindow  = SDL_CreateWindow("Image Viewer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0); 
     //get window surface to draw on
     SDL_Surface *psurface = SDL_GetWindowSurface(pwindow);
 
     //specific pixel with SDL_Rect {x,y,1,1}
     SDL_Rect pixel = (SDL_Rect){0,0,1,1};
     Uint32 color = 0x00;
-    for(int y = 0; y<width; y++){
-        for(int x = 0; x<height;x++){
-            //rgb values
-            Uint8 r,g,b;
-            //grab from file
+    Uint8 r,g,b;
+    for(int y = 0; y<height; y++){
+        for(int x = 0; x<width;x++){
+            //grab RGB from file
             r = (char)getchar();
             g = (char)getchar();
             b = (char)getchar();
@@ -49,5 +48,15 @@ int main(){
         }
     }
     SDL_UpdateWindowSurface(pwindow);
-    SDL_Delay(3000);
+    //handle quit
+    int app_running = 1;
+    while(app_running){
+        SDL_Event event;
+        while(SDL_PollEvent(&event)){
+            if(event.type== SDL_QUIT){
+                app_running = 0;
+            }
+        }
+        SDL_Delay(50);
+    }
 }

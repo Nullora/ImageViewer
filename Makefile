@@ -9,7 +9,7 @@ $(target) : $(target).c
 	$(cxx) $(cxxFlags) $(SDL_FLAGS)
 
 r: $(target)
-	./$(target)
+	cat i.ppm | ./$(target)
 
 clean:
 	rm -f $(target)
