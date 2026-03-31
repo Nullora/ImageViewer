@@ -6,7 +6,7 @@ I also wanted to learn more about SDL2 and file parsing in C.
 # Installation (if you wanna test it out)
 It is super unreliable so don't complain too much
 ```bash
-git clone ...
+git clone https://github.com/Nullora/ImageViewer
 cd ImageViewer
 make
 # in the Makefile, change the "filename" variable to your file directory. PPM only. Import in binary from GIMP not ASCII.
