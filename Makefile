@@ -2,7 +2,7 @@ cxx = gcc
 target = iv
 SDL_FLAGS = $(shell sdl2-config --cflags --libs)
 cxxFlags = -Wall -Wextra -g -o $(target) $(target).c
-filename = i.ppm
+filename = novus.ppm
 
 all: $(target)
 
