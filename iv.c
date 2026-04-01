@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<SDL2/SDL.h>
 
+//i intentionally write comments everywhere so i teach myself along the way
 int main(){
     //header data
         //this is one of the first times C makes perfect sense and works first try!!!!
