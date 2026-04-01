@@ -9,6 +9,5 @@ It is super unreliable so don't complain too much
 git clone https://github.com/Nullora/ImageViewer
 cd ImageViewer
 make
-# in the Makefile, change the "filename" variable to your file directory. PPM only. Import in binary from GIMP not ASCII.
-make r # see your picture rendered! 
+make r
 ```
