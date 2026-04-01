@@ -4,14 +4,20 @@
 
 int main(){
     //header data
+        //this is one of the first times C makes perfect sense and works first try!!!!
+        //usually i need to consult claude cz C is hell on earth
     printf("Enter a filepath(.ppm only): \n");
+    //a big mistake i did here is writing char user; instead of char user[254]; i forgot it needs to be an array
     char user[254];
+    //i discovered that scanf waits for user input and sscanf just grabs from an stdin pipe or a file
     scanf("%s", user);
     FILE *in = fopen(user, "rb");
     if(!in){
+        //fancy error handling to avoid segfault >:)
         fprintf(stderr,"unable to open file\n");
         exit(1);
     }
+    //pthrow is what im gonna throw away and not use
     char *pthrow = calloc(1000, sizeof(char));
     //read first line (header [P6 for binary]) {skip}
     fgets(pthrow, 1000, in);
@@ -42,8 +48,9 @@ int main(){
     Uint8 r,g,b;
     for(int y = 0; y<height; y++){
         for(int x = 0; x<width;x++){
-            //  rgb data for each pixel
-            //getc instead of getchar cz now were actuall opening the file instead of tunneling the file into stdin
+            //rgb data for each pixel
+            //fgetc instead of getchar cz now were actually opening the file instead of piping the data into stdin
+            //"man getc" told me getc is used for some macro shit so i stuck with fgetcs
             r = (char)fgetc(in);
             g = (char)fgetc(in);
             b = (char)fgetc(in);
