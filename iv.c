@@ -3,8 +3,15 @@
 #include<SDL2/SDL.h>
 
 int main(){
-        //header data
-    FILE *in = stdin;
+    //header data
+    printf("Enter a filepath(.ppm only): \n");
+    char user[254];
+    scanf("%s", user);
+    FILE *in = fopen(user, "rb");
+    if(!in){
+        fprintf(stderr,"unable to open file\n");
+        exit(1);
+    }
     char *pthrow = calloc(1000, sizeof(char));
     //read first line (header [P6 for binary]) {skip}
     fgets(pthrow, 1000, in);
@@ -25,21 +32,21 @@ int main(){
     free(pthrow);
 
 
-
     SDL_Window *pwindow  = SDL_CreateWindow("Image Viewer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0); 
     //get window surface to draw on
     SDL_Surface *psurface = SDL_GetWindowSurface(pwindow);
 
-    //specific pixel with SDL_Rect {x,y,1,1}
+    //single pixel with SDL_Rect {x,y,1,1}
     SDL_Rect pixel = (SDL_Rect){0,0,1,1};
     Uint32 color = 0x00;
     Uint8 r,g,b;
     for(int y = 0; y<height; y++){
         for(int x = 0; x<width;x++){
-            //grab RGB from file
-            r = (char)getchar();
-            g = (char)getchar();
-            b = (char)getchar();
+            //  rgb data for each pixel
+            //getc instead of getchar cz now were actuall opening the file instead of tunneling the file into stdin
+            r = (char)fgetc(in);
+            g = (char)fgetc(in);
+            b = (char)fgetc(in);
             color = SDL_MapRGB(psurface->format, r,g,b);
             pixel.x = x;
             pixel.y = y;
@@ -48,6 +55,7 @@ int main(){
         }
     }
     SDL_UpdateWindowSurface(pwindow);
+    fclose(in);
     //handle quit
     int app_running = 1;
     while(app_running){
